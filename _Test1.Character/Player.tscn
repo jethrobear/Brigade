@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://_Test1.Character/Player.gd" type="Script" id=1]
 [ext_resource path="res://_Test1.Character/test1.png" type="Texture" id=2]
@@ -45,6 +45,9 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 38.4727
 height = 43.153
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 47.1522, 67.7951 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 45.5732, 0.874756 )
@@ -104,5 +107,30 @@ Up Arrow: Enter/Climb
 Down Arrow: Crouch"
 __meta__ = {
 "_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SkillIndicator" type="Label" parent="."]
+margin_left = -37.0
+margin_top = -100.0
+margin_right = 65.0
+margin_bottom = -71.0
+text = "<Skill Info>"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource( 8 )
+
+[node name="InteractionIndicator" type="Label" parent="."]
+margin_left = -46.0
+margin_top = -142.0
+margin_right = 52.0
+margin_bottom = -117.0
+text = "Interact (Up Arrow)"
+__meta__ = {
 "_edit_use_anchors_": false
 }
