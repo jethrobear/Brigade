@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://_Test1.Character/Player.gd" type="Script" id=1]
+[ext_resource path="res://_Test1.Character/test1.png" type="Texture" id=2]
+[ext_resource path="res://_Generics/PlayerHUD.tscn" type="PackedScene" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 800, 0, 400, 599 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1797, 400, 599 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 400, 1797, 400, 599 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 800, 1797, 400, 599 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1200, 1797, 400, 599 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 38.4727
+height = 43.153
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 45.5732, 0.874756 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlayerHUD" parent="." instance=ExtResource( 3 )]
+margin_left = -500.0
+margin_top = 100.0
+margin_right = -499.688
+margin_bottom = 100.2
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 6 )
+animation = "walk"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = -40.0
+margin_top = -61.0
+margin_right = 40.0
+margin_bottom = -44.0
+text = "<VECTOR INFO>"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="_Instrutcions" type="Label" parent="."]
+margin_left = -475.0
+margin_top = -270.0
+margin_right = -289.0
+margin_bottom = -151.0
+text = "A/D, Left/Right arrow: Move
+Space: Jump
+Z: Light
+X: Heavy
+ASDF: Skills
+Up Arrow: Enter/Climb
+Down Arrow: Crouch"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
