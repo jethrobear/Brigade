@@ -21,6 +21,11 @@ enum AttackState {
 	GOING,
 	DONE
 }
+enum MovementState {
+	OPEN,
+	LIMITED_X,
+	LIMITED_Y,
+}
 
 # World modifiable variables
 export var GRAVITY = 400
@@ -40,21 +45,37 @@ var _current_state = MoveState.IDLE
 var _current_jump_state = JumpState.REST
 var _current_skill = SkillState.SKILL1
 var _current_attack = AttackState.DONE
+var _movement_state = MovementState.OPEN
+var _climb_speed = 0
 
 func _physics_process(delta):
-	# Control L/R movements
-	if _current_state != MoveState.IDLE:
-		var speed = 0
-		if _current_state == MoveState.RIGHT:
-			speed = SPEED
-		else:
-			speed = -1 * SPEED
-		_velocity.x += speed
+	# Post check if X-movement is limited:
+	if _movement_state == MovementState.LIMITED_X:
+		_velocity.x = 0
 	else:
-		_velocity.x = lerp(_velocity.x, 0, FRICTION)
-		
+		# Control L/R movements
+		if _current_state != MoveState.IDLE:
+			var speed = 0
+			if _current_state == MoveState.RIGHT:
+				speed = SPEED
+			else:
+				speed = -1 * SPEED
+			_velocity.x += speed
+		else:
+			_velocity.x = lerp(_velocity.x, 0, FRICTION)
+	
 	# Control gravity
-	_velocity.y += delta * GRAVITY
+	if _movement_state == MovementState.OPEN:
+		_velocity.y += delta * GRAVITY
+	elif _movement_state == MovementState.LIMITED_X:
+		# Assume that the Entity now floats in space
+		pass  # The main controls are held by move_up() and move_down()
+	elif _movement_state == MovementState.LIMITED_Y:
+		pass
+
+	# Release the character if landed on a floor
+	if is_on_floor():
+		_movement_state = MovementState.OPEN
 
 	# Determine animation state by checking current velocities
 	if round(_velocity.x * 1000) != 0 or $AnimatedSprite.frame != 0:
@@ -84,3 +105,15 @@ func set_attack_state(current_attack):
 func initialize_jump():
 	_velocity.y = -JUMP_FORCE
 	_current_jump_state = JumpState.JUMP_INITIAL
+
+func move_up():
+	# Manually move the Entity up
+	_velocity.y = -1 * _climb_speed
+	
+func move_down():
+	# Manually move the Entity down
+	_velocity.y = _climb_speed
+
+func rest():
+	_velocity.x = 0
+	_velocity.y = 0

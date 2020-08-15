@@ -34,10 +34,19 @@ func _process(delta):
 	elif (Input.is_action_pressed("ui_heavy") 
 			and get_attack_state() == AttackState.DONE):
 		set_attack_state(AttackState.GOING)
-	
-	# Interact with objects
-	if Input.is_action_pressed("ui_up") and has_interactable():
-		interact_with_object()
+
+	# Object was X-Locked, ui_up/ui_down is now toggled
+	if _movement_state == MovementState.LIMITED_X:
+		if Input.is_action_pressed("ui_up"):
+			move_up()
+		elif Input.is_action_pressed("ui_down"):
+			move_down()
+		else:
+			rest()
+	else:
+		# Interact with objects
+		if Input.is_action_pressed("ui_up") and has_interactable():
+			interact_with_object()
 	
 	# Print debug labels
 	$Label.text = "{X}, {Y}".format({"X": _velocity.x, "Y": _velocity.y})

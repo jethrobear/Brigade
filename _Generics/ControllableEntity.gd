@@ -24,7 +24,17 @@ func _on_area_entered(area):
 func _on_area_exited(area):
 	_interact_object.visible = false
 	_interactable_instance = null
+	_movement_state = MovementState.OPEN
 
 func interact_with_object():
 	# Execute actionables() found in the interactive box
-	_interactable_instance.call_interaction()
+	_interactable_instance.call_interaction(self)
+
+func limit_movement_y(interaction_area, speed):
+	# Set gravity pull
+	_movement_state = MovementState.LIMITED_X
+	_climb_speed = speed
+	
+	# Align Entity with left of object
+	global_position.x = interaction_area.global_position.x
+	global_position.y -= 10  # Added buffer to not immediately exit LOCKED mode
