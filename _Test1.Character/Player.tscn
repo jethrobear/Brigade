@@ -49,7 +49,7 @@ height = 43.153
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 47.1522, 67.7951 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="ControllableEntity" type="KinematicBody2D"]
 position = Vector2( 45.5732, 0.874756 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -97,13 +97,12 @@ __meta__ = {
 margin_left = -475.0
 margin_top = -270.0
 margin_right = -289.0
-margin_bottom = -151.0
+margin_bottom = -171.0
 text = "A/D, Left/Right arrow: Move
 Space: Jump
 Z: Light
 X: Heavy
 ASDF: Skills
-Up Arrow: Enter/Climb
 Down Arrow: Crouch"
 __meta__ = {
 "_edit_group_": true,

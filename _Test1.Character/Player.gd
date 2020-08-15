@@ -35,6 +35,10 @@ func _process(delta):
 			and get_attack_state() == AttackState.DONE):
 		set_attack_state(AttackState.GOING)
 	
+	# Interact with objects
+	if Input.is_action_pressed("ui_up") and has_interactable():
+		interact_with_object()
+	
 	# Print debug labels
 	$Label.text = "{X}, {Y}".format({"X": _velocity.x, "Y": _velocity.y})
 	$SkillIndicator.text = "Selected Skill: {skill}".format({"skill": _current_skill + 1})
