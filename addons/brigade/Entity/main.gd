@@ -19,6 +19,10 @@ enum SkillState {
 	SKILL3,
 	SKILL4
 }
+enum AttackState {
+	ONGOING,
+	DONE
+}
 
 # World modifiable variables
 export var GRAVITY = 400
@@ -39,6 +43,7 @@ var _current_state = MoveState.IDLE
 var _current_jump_state = JumpState.REST
 var _gravity_state = GravityState.FREEFALL
 var _skill_state = SkillState.SKILL1
+var _attack_state = AttackState.DONE
 
 func _physics_process(delta):
 	# Control L/R movements
@@ -75,6 +80,16 @@ func execute_light_attack():
 func execute_heavy_attack():
 	# Interface for Heavy Attack
 	pass
+
+func _debounce_light_attack():
+	# Call this first to debounce press
+	if _attack_state == AttackState.DONE:
+		execute_light_attack()
+	
+func _debounce_heavy_attack():
+	# Call this first to debounce press
+	if _attack_state == AttackState.DONE:
+		execute_heavy_attack()
 
 func set_current_state(current_state):
 	_current_state = current_state
