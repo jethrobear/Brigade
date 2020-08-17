@@ -13,6 +13,12 @@ enum MoveState {
 	IDLE
 }
 const GravityState = preload("res://addons/brigade/GravityEnum.gd")
+enum SkillState {
+	SKILL1,
+	SKILL2,
+	SKILL3,
+	SKILL4
+}
 
 # World modifiable variables
 export var GRAVITY = 400
@@ -32,6 +38,7 @@ var _velocity = Vector2()
 var _current_state = MoveState.IDLE
 var _current_jump_state = JumpState.REST
 var _gravity_state = GravityState.FREEFALL
+var _skill_state = SkillState.SKILL1
 
 func _physics_process(delta):
 	# Control L/R movements
@@ -60,6 +67,14 @@ func _physics_process(delta):
 	
 	# Move the Entity
 	_velocity = move_and_slide(_velocity, Vector2.UP)
+
+func execute_light_attack():
+	# Interface for Light Attack
+	pass
+	
+func execute_heavy_attack():
+	# Interface for Heavy Attack
+	pass
 
 func set_current_state(current_state):
 	_current_state = current_state

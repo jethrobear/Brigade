@@ -32,3 +32,57 @@ color = Color( 0, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Skill1" type="ColorRect" parent="."]
+margin_left = 600.0
+margin_top = 20.0
+margin_right = 640.0
+margin_bottom = 60.0
+color = Color( 0.4, 0.4, 0.4, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Skill1"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "1"
+
+[node name="Skill2" type="ColorRect" parent="."]
+margin_left = 650.0
+margin_top = 20.0
+margin_right = 690.0
+margin_bottom = 60.0
+color = Color( 0.4, 0.4, 0.4, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Skill2"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "2"
+
+[node name="Skill3" type="ColorRect" parent="."]
+margin_left = 700.0
+margin_top = 20.0
+margin_right = 740.0
+margin_bottom = 60.0
+color = Color( 0.4, 0.4, 0.4, 1 )
+
+[node name="Label" type="Label" parent="Skill3"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "3"
+
+[node name="Skill4" type="ColorRect" parent="."]
+margin_left = 750.0
+margin_top = 20.0
+margin_right = 790.0
+margin_bottom = 60.0
+color = Color( 0.4, 0.4, 0.4, 1 )
+
+[node name="Label" type="Label" parent="Skill4"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "4"

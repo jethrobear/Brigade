@@ -2,6 +2,9 @@ extends "res://addons/brigade/Entity/main.gd"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Clean HUD
+	update_skill_hud()
+	
 	set_current_state(MoveState.IDLE)
 	if Input.is_action_pressed("ui_right"):
 		set_current_state(MoveState.RIGHT)
@@ -12,6 +15,16 @@ func _process(delta):
 	if (Input.is_action_pressed("ui_select") 
 		and get_current_jump_state() == JumpState.REST):
 		initialize_jump()
+	
+	# Change skill
+	if Input.is_action_pressed("ui_skill_1"):
+		_skill_state = SkillState.SKILL1
+	elif Input.is_action_pressed("ui_skill_2"):
+		_skill_state = SkillState.SKILL2
+	elif Input.is_action_pressed("ui_skill_3"):
+		_skill_state = SkillState.SKILL3
+	elif Input.is_action_pressed("ui_skill_4"):
+		_skill_state = SkillState.SKILL4
 	
 	# If the Entity is inside a ladder then allow up/down buttons
 	if _gravity_state == GravityState.LADDER:
@@ -25,6 +38,20 @@ func _process(delta):
 
 	# Update the HUD
 	process_hud()
+
+func update_skill_hud():
+	$PlayerHUD/Skill1.color = Color("#666666")
+	$PlayerHUD/Skill2.color = Color("#666666")
+	$PlayerHUD/Skill3.color = Color("#666666")
+	$PlayerHUD/Skill4.color = Color("#666666")
+	if _skill_state == SkillState.SKILL1:
+		$PlayerHUD/Skill1.color = Color.darkred
+	if _skill_state == SkillState.SKILL2:
+		$PlayerHUD/Skill2.color = Color.darkred
+	if _skill_state == SkillState.SKILL3:
+		$PlayerHUD/Skill3.color = Color.darkred
+	if _skill_state == SkillState.SKILL4:
+		$PlayerHUD/Skill4.color = Color.darkred
 
 func process_hud():
 	$PlayerHUD/Health.rect_scale = Vector2(health / max_health, 1)
