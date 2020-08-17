@@ -37,4 +37,32 @@ func limit_movement_y(interaction_area, speed):
 	
 	# Align Entity with left of object
 	global_position.x = interaction_area.global_position.x
-	global_position.y -= 10  # Added buffer to not immediately exit LOCKED mode
+	
+	# Added buffer to not immediately exit LOCKED mode
+	if interaction_area.global_position.y <= global_position.y:
+		# The Entity's top-left point is below Entity
+		global_position.y -= 10  
+	else:
+		# The Entity's top-left point is above Entity
+		global_position.y = interaction_area.global_position.y 
+		
+func move_up():
+	.move_up()
+	
+	# If the Entity hits a ceiling, then release it
+	if is_on_ceiling():
+		# Determine the max height of the collider
+		var collider_height = 0
+		for slide_idx in get_slide_count():
+			collider_height = max(
+					get_slide_collision(slide_idx).collider.cell_size.y, 
+					collider_height
+			)
+		
+		# Find the collision for the Entity
+		var entity_height = 0
+		for child in get_children():
+			if child.get("shape"):
+				entity_height = max(child.shape.height, entity_height)
+		global_position.y -= collider_height + entity_height
+		_movement_state = MovementState.OPEN
