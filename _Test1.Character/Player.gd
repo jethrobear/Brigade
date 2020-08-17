@@ -12,7 +12,14 @@ func _process(delta):
 	if (Input.is_action_pressed("ui_select") 
 		and get_current_jump_state() == JumpState.REST):
 		initialize_jump()
-		
+	
+	# If the Entity is inside a ladder then allow up/down buttons
+	if _gravity_state == GravityState.LADDER:
+		if Input.is_action_pressed("ui_up"):
+			position.y -= CLIMB_SPEED
+		elif Input.is_action_pressed("ui_down"):
+			position.y += CLIMB_SPEED
+	
 	# Print debug labels
 	$Label.text = "{X}, {Y}".format({"X": _velocity.x, "Y": _velocity.y})
 

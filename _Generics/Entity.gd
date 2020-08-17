@@ -11,12 +11,14 @@ enum MoveState {
 	RIGHT, 
 	IDLE
 }
+const GravityState = preload("res://_Generics/GravityEnum.gd")
 
 # World modifiable variables
 export var GRAVITY = 400
 export var SPEED = 10
 export var FRICTION = 0.5
 export var JUMP_FORCE = 250
+export var CLIMB_SPEED = 10
 
 export var health = 0
 export var max_health = 100
@@ -28,6 +30,7 @@ export var max_focus = 100
 var _velocity = Vector2()
 var _current_state = MoveState.IDLE
 var _current_jump_state = JumpState.REST
+var _gravity_state = GravityState.FREEFALL
 
 func _physics_process(delta):
 	# Control L/R movements
@@ -42,7 +45,10 @@ func _physics_process(delta):
 		_velocity.x = lerp(_velocity.x, 0, FRICTION)
 		
 	# Control gravity
-	_velocity.y += delta * GRAVITY
+	if _gravity_state == GravityState.FREEFALL:
+		_velocity.y += delta * GRAVITY
+	else:
+		_velocity.y = 0
 
 	# Determine animation state by checking current velocities
 	if round(_velocity.x * 1000) != 0 or $AnimatedSprite.frame != 0:
