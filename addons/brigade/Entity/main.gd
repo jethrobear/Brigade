@@ -1,3 +1,4 @@
+tool
 extends KinematicBody2D
 
 # Enums
@@ -11,7 +12,7 @@ enum MoveState {
 	RIGHT, 
 	IDLE
 }
-const GravityState = preload("res://_Generics/GravityEnum.gd")
+const GravityState = preload("res://addons/brigade/GravityEnum.gd")
 
 # World modifiable variables
 export var GRAVITY = 400

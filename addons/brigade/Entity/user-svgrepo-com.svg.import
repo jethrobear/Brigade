@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-301214a8aa5610c533cb8658036dcf1c.stex"
+path="res://.import/user-svgrepo-com.svg-5c96abb1466061f04693ced7a2ee9397.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/brigade/Ladder/icon.png"
-dest_files=[ "res://.import/icon.png-301214a8aa5610c533cb8658036dcf1c.stex" ]
+source_file="res://addons/brigade/Entity/user-svgrepo-com.svg"
+dest_files=[ "res://.import/user-svgrepo-com.svg-5c96abb1466061f04693ced7a2ee9397.stex" ]
 
 [params]
 

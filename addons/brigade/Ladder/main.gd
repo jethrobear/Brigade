@@ -1,7 +1,7 @@
 tool
 extends Area2D
 
-const GravityState = preload("res://_Generics/GravityEnum.gd")
+const GravityState = preload("res://addons/brigade/GravityEnum.gd")
 
 func _enter_tree():
 	connect("body_entered", self, "body_entered")

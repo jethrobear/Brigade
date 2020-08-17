@@ -1,4 +1,4 @@
-extends "res://_Generics/Entity.gd"
+extends "res://addons/brigade/Entity/main.gd"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
