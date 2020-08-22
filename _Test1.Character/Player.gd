@@ -1,4 +1,4 @@
-extends "res://_Generics/ControllableEntity.gd"
+extends "res://addons/brigade/ControllableEntity/main.gd"
 
 func execute_light_attack():
 	print("LH")
